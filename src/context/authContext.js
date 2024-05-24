@@ -25,3 +25,4 @@ export const AuthModeContextProvider = ({children}) => {
         </AuthContext.Provider>
     );
 };
+
