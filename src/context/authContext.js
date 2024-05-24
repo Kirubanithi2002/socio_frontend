@@ -1,21 +1,27 @@
-import { Children, createContext, useEffect, useState } from "react";
+import { Children, createContext, useEffect, useState, useContext } from "react";
 
 export const AuthContext = createContext();
 
 export const AuthModeContextProvider = ({children}) => {
-    const [darkMode, setDarkMode] = useState(
-        JSON.parse(localStorage.getItem("darkMode")) || false
+    const [currentUser, setCurrentUser] = useState(
+        JSON.parse(localStorage.getItem("user")) || null
     );
 
-    const toggle = () => {
-        setDarkMode(!darkMode)
+    const login = () => {
+        setCurrentUser({
+            id:1,
+            name:"Joe",
+            profilePic: "https://images.pexels.com/photos/3228727/pexels-photo-3228727.jpeg?auto=compress&cs=tinysrgb&w=1600",
+        });
     }
 
     useEffect(() => {
-        localStorage.setItem("darkMode", darkMode)
-    },[darkMode])
+        localStorage.setItem("user", JSON.stringify(currentUser))
+    },[currentUser])
 
     return(
-        <DarkModeContext.Provider value={{darkMode, toggle}}>{children}</DarkModeContext.Provider>
-    )
+        <AuthContext.Provider value={{currentUser, login}}>
+            {children}
+        </AuthContext.Provider>
+    );
 };
