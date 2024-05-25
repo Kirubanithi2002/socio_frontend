@@ -36,7 +36,15 @@
                     width: 500px;
                     background-color: transparent;
                     color: themed("textColor");
-                    z-index: 999;;
+                    z-index: 999;
+
+                    @include mobile{
+                        display: none;
+                    }
+        
+                    @include tablet{
+                        width: 200px;
+                    }
                 }
             }
         }
@@ -46,11 +54,20 @@
             align-items: center;
             gap: 20px;
 
+            @include mobile{
+                display: none;
+            }
+
             .user{
                 display: flex;
                 align-items: center;
                 gap: 10px;
                 font-weight: 500;
+
+                @include tablet{
+                    width: none;
+                }
+
                 img{
                     width: 30px;
                     height: 30px;
